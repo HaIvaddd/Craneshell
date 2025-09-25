@@ -1,4 +1,4 @@
-# Termius
+# Craneshell
 
 <p align="center">
   <strong>Visually create, customize, and save your Alacritty themes with a live preview.</strong>
@@ -6,7 +6,7 @@
 
 ## 🌟 About The Project
 
-Tired of manually editing your `.toml` file and restarting Alacritty just to see a small color change? **Termius** solves this by providing an intuitive, web-based GUI to style your terminal. See your changes instantly in a live terminal simulator, tweak every detail from colors to transparency, and download your perfect configuration file with a single click.
+Tired of manually editing your `.toml` file and restarting Alacritty just to see a small color change? **Craneshell** solves this by providing an intuitive, web-based GUI to style your terminal. See your changes instantly in a live terminal simulator, tweak every detail from colors to transparency, and download your perfect configuration file with a single click.
 
 Create an account to unlock your personal theme library in the cloud. Save and manage your favorite configurations and access them from any machine, anytime.
 
@@ -19,7 +19,7 @@ Create an account to unlock your personal theme library in the cloud. Save and m
 ### Built With
 This project is powered by an amazing set of technologies:
 
-*   **Backend:** [FastAPI](https://fastapi.tiangolo.com/) / [Django](https://www.djangoproject.com/)
+*   **Backend:** [FastAPI](https://fastapi.tiangolo.com/)
 *   **Frontend:** [Vue.js](https://vuejs.org/) / [React](https://reactjs.org/)
 *   **Live Terminal:** [Xterm.js](https://xtermjs.org/)
 *   **Database:** [PostgreSQL](https://www.postgresql.org/)
@@ -37,7 +37,7 @@ To get a local copy up and running, follow these simple steps.
 
 1.  **Clone the repo**
     ```sh
-    git clone https://github.com/[your_username]/[your_repo].git
+    git clone https://github.com/HaIvaddd/Craneshell.git
     cd [your_repo]
     ```
 2.  **Backend Setup**
