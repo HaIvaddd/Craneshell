@@ -28,6 +28,8 @@
     *   6b. The frontend displays the error message to the user next to the relevant form field.
         **Postcondition:** A new user account is created in the system.
 
+![UC1: Register New Account](/docs/diagrams/UC1.png)
+
 ### UC2: Login
 
 **Actor:** Unauthenticated User
@@ -45,6 +47,8 @@
     *   4a. The backend returns a `401 Unauthorized` status.
     *   4b. The frontend displays a generic "Invalid username or password" message.
         **Postcondition:** The user is authenticated, and an active session is established via the JWT.
+
+![UC2: Login](/docs/diagrams/UC2png)
 
 ### UC3: Customize and Download a Configuration (Guest Flow)
 
@@ -67,6 +71,8 @@
     *   7b. The frontend displays a generic error notification like "Failed to generate configuration."
         **Postcondition:** The user has a ready-to-use `alacritty.toml` file on their local machine.
 
+![UC3: Download Configuration](/docs/diagrams/UC3.png)
+
 ### UC4: Save Custom Configuration to Library
 
 **Actor:** Authenticated User
@@ -86,3 +92,5 @@
     *   5b. The backend returns a `409 Conflict` error with the message "A configuration with this name already exists."
     *   5c. The frontend displays this error message within the modal, allowing the user to enter a different name.
         **Postcondition:** The user's custom configuration is persisted in their personal library and is available for future use.
+
+![UC4: Save Configuration](/docs/diagrams/UC4.png)
