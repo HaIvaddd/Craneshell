@@ -66,4 +66,4 @@ frontend/.vite/
 # Статика / генерация
 ########################
 frontend/.cache/
-frontend
+frontend/.DS_Store

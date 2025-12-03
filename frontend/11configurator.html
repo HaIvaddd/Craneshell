@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Configurator - Craneshell</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <header id="header"></header>
+
+    <main class="container">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <!-- HEADER -->
+            <div style="margin-bottom: 32px;">
+                <h1 style="margin-bottom: 8px;">🎨 Color Configurator</h1>
+                <p style="color: var(--color-text-secondary);">Create beautiful terminal color themes with 16 colors</p>
+            </div>
+
+            <!-- MAIN LAYOUT: 2 COLUMNS -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px;">
+                <!-- LEFT SIDE: COLOR PICKERS -->
+                <div class="card" style="padding: 24px;">
+                    <h3 style="margin-bottom: 20px;">📋 Colors (16 palette)</h3>
+                    
+                    <!-- GRID OF 16 COLOR PICKERS (4x4) -->
+                    <div class="colors-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;">
+                        <!-- Row 1 -->
+                        <div class="form-group">
+                            <label for="color0">Black (0)</label>
+                            <input type="color" id="color0" value="#000000" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+                        <div class="form-group">
+                            <label for="color1">Red (1)</label>
+                            <input type="color" id="color1" value="#ff0000" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+                        <div class="form-group">
+                            <label for="color2">Green (2)</label>
+                            <input type="color" id="color2" value="#00ff00" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+                        <div class="form-group">
+                            <label for="color3">Yellow (3)</label>
+                            <input type="color" id="color3" value="#ffff00" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+
+                        <!-- Row 2 -->
+                        <div class="form-group">
+                            <label for="color4">Blue (4)</label>
+                            <input type="color" id="color4" value="#0000ff" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+                        <div class="form-group">
+                            <label for="color5">Magenta (5)</label>
+                            <input type="color" id="color5" value="#ff00ff" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+                        <div class="form-group">
+                            <label for="color6">Cyan (6)</label>
+                            <input type="color" id="color6" value="#00ffff" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+                        <div class="form-group">
+                            <label for="color7">White (7)</label>
+                            <input type="color" id="color7" value="#ffffff" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+
+                        <!-- Row 3 (Bright versions) -->
+                        <div class="form-group">
+                            <label for="color8">Bright Black (8)</label>
+                            <input type="color" id="color8" value="#555555" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+                        <div class="form-group">
+                            <label for="color9">Bright Red (9)</label>
+                            <input type="color" id="color9" value="#ff5555" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+                        <div class="form-group">
+                            <label for="color10">Bright Green (10)</label>
+                            <input type="color" id="color10" value="#55ff55" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+                        <div class="form-group">
+                            <label for="color11">Bright Yellow (11)</label>
+                            <input type="color" id="color11" value="#ffff55" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+
+                        <!-- Row 4 (Bright versions cont.) -->
+                        <div class="form-group">
+                            <label for="color12">Bright Blue (12)</label>
+                            <input type="color" id="color12" value="#5555ff" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+                        <div class="form-group">
+                            <label for="color13">Bright Magenta (13)</label>
+                            <input type="color" id="color13" value="#ff55ff" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+                        <div class="form-group">
+                            <label for="color14">Bright Cyan (14)</label>
+                            <input type="color" id="color14" value="#55ffff" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+                        <div class="form-group">
+                            <label for="color15">Bright White (15)</label>
+                            <input type="color" id="color15" value="#ffffff" class="form-control color-input" style="height: 60px; cursor: pointer;">
+                        </div>
+                    </div>
+
+                    <!-- SPECIAL COLORS -->
+                    <hr style="border: none; border-top: 1px solid var(--color-border); margin: 24px 0;">
+                    
+                    <h4 style="margin-bottom: 16px;">🔧 Special Colors</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="form-group">
+                            <label for="foreground">Foreground</label>
+                            <input type="color" id="foreground" value="#ffffff" class="form-control special-color" style="height: 50px; cursor: pointer;">
+                        </div>
+                        <div class="form-group">
+                            <label for="background">Background</label>
+                            <input type="color" id="background" value="#000000" class="form-control special-color" style="height: 50px; cursor: pointer;">
+                        </div>
+                    </div>
+
+                    <!-- OPACITY SLIDER -->
+                    <div class="form-group" style="margin-top: 16px;">
+                        <label for="opacity">Opacity: <span id="opacityValue">100</span>%</label>
+                        <input type="range" id="opacity" min="0" max="100" value="100" class="form-control" style="cursor: pointer; height: 8px;">
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE: PREVIEW -->
+                <div class="card" style="padding: 24px; display: flex; flex-direction: column;">
+                    <h3 style="margin-bottom: 20px;">👀 Preview</h3>
+                    
+                    <!-- COLOR PREVIEW (4x4) -->
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 24px;">
+                        <div id="prev0" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #000000;"></div>
+                        <div id="prev1" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #ff0000;"></div>
+                        <div id="prev2" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #00ff00;"></div>
+                        <div id="prev3" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #ffff00;"></div>
+                        
+                        <div id="prev4" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #0000ff;"></div>
+                        <div id="prev5" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #ff00ff;"></div>
+                        <div id="prev6" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #00ffff;"></div>
+                        <div id="prev7" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #ffffff;"></div>
+                        
+                        <div id="prev8" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #555555;"></div>
+                        <div id="prev9" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #ff5555;"></div>
+                        <div id="prev10" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #55ff55;"></div>
+                        <div id="prev11" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #ffff55;"></div>
+                        
+                        <div id="prev12" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #5555ff;"></div>
+                        <div id="prev13" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #ff55ff;"></div>
+                        <div id="prev14" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #55ffff;"></div>
+                        <div id="prev15" style="height: 60px; border-radius: 8px; border: 1px solid var(--color-border); background: #ffffff;"></div>
+                    </div>
+
+                    <!-- TERMINAL PREVIEW -->
+                    <hr style="border: none; border-top: 1px solid var(--color-border); margin: 24px 0;">
+                    
+                    <h4 style="margin-bottom: 12px;">🖥️ Terminal Emulator</h4>
+                    <div id="terminalContent" style="flex: 1; padding: 16px; border-radius: 8px; border: 1px solid var(--color-border); background: #000000; color: #ffffff; font-family: 'Courier New', monospace; font-size: 12px; overflow-y: auto; min-height: 200px; line-height: 1.6; white-space: pre-wrap; word-wrap: break-word;">
+                        $ ls -la
+                        total 256
+                        drwxr-xr-x 5 user user 4096 Dec 3 23:00 .
+                        drwxr-xr-x 3 user user 4096 Dec 3 22:50 ..
+                        -rw-r--r-- 1 user user 1024 Dec 3 23:05 config.yaml
+                        craneshell v1.0.0 ready! 🦌
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTIONS BUTTONS -->
+            <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px;">
+                <button class="btn btn-primary" onclick="saveConfig()" style="flex: 1; min-width: 150px;">
+                    💾 Save Config
+                </button>
+                <button class="btn btn-primary" onclick="downloadConfig()" style="flex: 1; min-width: 150px;">
+                    📥 Download
+                </button>
+                <button class="btn" onclick="copyToClipboard()" style="flex: 1; min-width: 150px;">
+                    📋 Copy JSON
+                </button>
+                <button class="btn" onclick="randomizeColors()" style="flex: 1; min-width: 150px;">
+                    🎲 Random
+                </button>
+                <button class="btn" onclick="resetColors()" style="flex: 1; min-width: 150px;">
+                    🔄 Reset
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initPage } from './js/init.js';
+        
+        // Инициализируй страницу
+        await initPage();
+
+        // Хранилище цветов
+        let colors = {};
+
+        function getColors() {
+            const newColors = {};
+            for (let i = 0; i < 16; i++) {
+                newColors[i] = document.getElementById(`color${i}`)?.value || '#000000';
+            }
+            return newColors;
+        }
+
+        // ГЛАВНАЯ ФУНКЦИЯ обновления всего
+        function updateAllPreviews() {
+            console.log('🔄 Updating previews...');
+            
+            colors = getColors();
+            
+            // Обнови color previews
+            for (let i = 0; i < 16; i++) {
+                const preview = document.getElementById(`prev${i}`);
+                if (preview) {
+                    preview.style.background = colors[i];
+                }
+            }
+            
+            // Обнови terminal с палитрой
+            updateTerminal();
+        }
+
+        function updateTerminal() {
+            const terminal = document.getElementById('terminalContent');
+            const fg = document.getElementById('foreground');
+            const bg = document.getElementById('background');
+            const opacity = document.getElementById('opacity');
+            
+            if (!terminal || !fg || !bg || !opacity) {
+                console.warn('⚠️ Missing terminal elements');
+                return;
+            }
+            
+            colors = getColors();
+            
+            const fgColor = fg.value || '#ffffff';
+            const bgColor = bg.value || '#000000';
+            const opacityVal = opacity.value / 100;
+            
+            console.log(`🎨 Terminal: fg=${fgColor}, bg=${bgColor}, opacity=${opacityVal}`);
+            
+            // Применй фон и основной текст
+            terminal.style.color = fgColor;
+            terminal.style.backgroundColor = bgColor;
+            terminal.style.opacity = opacityVal;
+            
+            // Генерируй HTML с цветами из палитры
+            // color 2 = Green = directory
+            // color 1 = Red = error/special
+            // color 3 = Yellow = executables
+            const terminalHTML = `<span style="color: ${fgColor};">$ <span style="color: ${colors[2]};">ls -la</span></span>
+<span style="color: ${fgColor};">total 256</span>
+<span style="color: ${colors[4]};">drwxr-xr-x</span> 5 user user 4096 Dec 3 23:00 <span style="color: ${colors[4]}>."</span>
+<span style="color: ${colors[4]};">drwxr-xr-x</span> 3 user user 4096 Dec 3 22:50 <span style="color: ${colors[4]}>".."</span>
+<span style="color: ${fgColor};">-rw-r--r-- 1 user user 1024 Dec 3 23:05 config.yaml</span>
+<span style="color: ${colors[3]};">craneshell</span> v1.0.0 ready! 🦌`;
+            
+            terminal.innerHTML = terminalHTML;
+        }
+
+        // Инициализируй event listeners для 16 цветов
+        console.log('📝 Setting up color input listeners...');
+        for (let i = 0; i < 16; i++) {
+            const input = document.getElementById(`color${i}`);
+            if (input) {
+                input.addEventListener('input', updateAllPreviews);
+                input.addEventListener('change', updateAllPreviews);
+            }
+        }
+
+        // Foreground/Background listeners
+        const fgInput = document.getElementById('foreground');
+        const bgInput = document.getElementById('background');
+        
+        if (fgInput) {
+            fgInput.addEventListener('input', updateTerminal);
+            fgInput.addEventListener('change', updateTerminal);
+        }
+        if (bgInput) {
+            bgInput.addEventListener('input', updateTerminal);
+            bgInput.addEventListener('change', updateTerminal);
+        }
+
+        // Opacity slider
+        const opacityInput = document.getElementById('opacity');
+        if (opacityInput) {
+            opacityInput.addEventListener('input', (e) => {
+                document.getElementById('opacityValue').textContent = e.target.value;
+                updateTerminal();
+            });
+            opacityInput.addEventListener('change', updateTerminal);
+        }
+
+        // Инициализируй терминал сразу
+        updateAllPreviews();
+        
+        console.log('✅ Configurator initialized!');
+
+        // Глобальные функции для кнопок
+        window.saveConfig = async function() {
+            const colorsList = [];
+            for (let i = 0; i < 16; i++) {
+                colorsList.push(document.getElementById(`color${i}`).value);
+            }
+            
+            const config = {
+                name: prompt('Config name:', 'My Theme') || 'My Theme',
+                colors: colorsList,
+                foreground: document.getElementById('foreground').value,
+                background: document.getElementById('background').value,
+                opacity: document.getElementById('opacity').value
+            };
+            
+            console.log('💾 Saving config:', config);
+            alert('✅ Config saved! (Demo - Backend integration needed)');
+        };
+
+        window.downloadConfig = function() {
+            const colorsList = [];
+            for (let i = 0; i < 16; i++) {
+                colorsList.push(document.getElementById(`color${i}`).value);
+            }
+            
+            const config = {
+                name: 'Craneshell Theme',
+                colors: colorsList,
+                foreground: document.getElementById('foreground').value,
+                background: document.getElementById('background').value,
+                opacity: document.getElementById('opacity').value
+            };
+            
+            const json = JSON.stringify(config, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'craneshell-theme.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            console.log('📥 Downloaded theme');
+        };
+
+        window.copyToClipboard = function() {
+            const colorsList = [];
+            for (let i = 0; i < 16; i++) {
+                colorsList.push(document.getElementById(`color${i}`).value);
+            }
+            
+            const config = {
+                colors: colorsList,
+                foreground: document.getElementById('foreground').value,
+                background: document.getElementById('background').value
+            };
+            
+            const json = JSON.stringify(config, null, 2);
+            navigator.clipboard.writeText(json).then(() => {
+                alert('✅ Copied to clipboard!');
+            }).catch(() => {
+                alert('❌ Failed to copy');
+            });
+        };
+
+        window.randomizeColors = function() {
+            console.log('🎲 Randomizing colors...');
+            for (let i = 0; i < 16; i++) {
+                const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+                const input = document.getElementById(`color${i}`);
+                if (input) {
+                    input.value = randomColor;
+                }
+            }
+            updateAllPreviews();
+        };
+
+        window.resetColors = function() {
+            console.log('🔄 Resetting colors...');
+            const defaultColors = [
+                '#000000', '#ff0000', '#00ff00', '#ffff00',
+                '#0000ff', '#ff00ff', '#00ffff', '#ffffff',
+                '#555555', '#ff5555', '#55ff55', '#ffff55',
+                '#5555ff', '#ff55ff', '#55ffff', '#ffffff'
+            ];
+            
+            for (let i = 0; i < 16; i++) {
+                const input = document.getElementById(`color${i}`);
+                if (input) {
+                    input.value = defaultColors[i];
+                }
+            }
+            updateAllPreviews();
+        };
+    </script>
+</body>
+</html>

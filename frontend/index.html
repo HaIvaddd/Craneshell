@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Craneshell - Interactive Kitty Terminal Configurator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--color-primary) 0%, #50b8c6 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-content h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-content p {
+            font-size: 24px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 2px solid white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--color-primary);
+            border-color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .features-section {
+            padding: 80px 40px;
+            background: var(--color-bg-primary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: var(--color-surface);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 12px;
+            color: var(--color-text-primary);
+        }
+
+        .feature-card p {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .stats-section {
+            padding: 80px 40px;
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .stat-item h4 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 40px;
+            }
+
+            .hero-content p {
+                font-size: 18px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .features-section,
+            .stats-section {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header"></header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>🦌 Craneshell</h1>
+            <p>Interactive Kitty Terminal Configurator</p>
+            <p style="font-size: 16px; margin-bottom: 40px; opacity: 0.9;">
+                Create beautiful terminal themes with real-time preview
+            </p>
+            <div class="cta-buttons">
+                <a href="/configurator.html" class="btn btn-primary">🎨 Create Config</a>
+                <a href="/public.html" class="btn btn-secondary">🌍 Browse Themes</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 20px;">✨ Features</h2>
+            <p style="text-align: center; color: var(--color-text-secondary); margin-bottom: 40px;">
+                Everything you need for perfect terminal theming
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>16 Color Picker</h3>
+                    <p>Intuitive color selection for all 16 colors with live terminal preview</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Full Customization</h3>
+                    <p>Adjust opacity, foreground, background, and selection colors</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Copy & Download</h3>
+                    <p>Export your config in standard kitty format with one click</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">☁️</div>
+                    <h3>Cloud Storage</h3>
+                    <p>Save your themes in the cloud and access them anywhere</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Share Themes</h3>
+                    <p>Share your beautiful configs with the community</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-time Preview</h3>
+                    <p>See changes instantly in the terminal emulator</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 10px;">Join Our Community</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h4>1000+</h4>
+                    <p>Active Users</p>
+                </div>
+                <div class="stat-item">
+                    <h4>5000+</h4>
+                    <p>Themes Created</p>
+                </div>
+                <div class="stat-item">
+                    <h4>100%</h4>
+                    <p>Free & Open Source</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="module">
+        import { initHeader } from './js/header.js';
+        import { checkHealth } from './js/api.js';
+
+        initHeader();
+        checkHealth().catch(err => console.error('Backend error:', err));
+    </script>
+</body>
+</html>
