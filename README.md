@@ -75,4 +75,4 @@ Please feel free to fork the repo and create a pull request. You can also simply
 
 ## 📜 Documentation
 
-SRS: ![SRS](/docs/SRS.md)
+SRS: ![SRS](./docs/SRS.md)

@@ -48,7 +48,7 @@
     *   4b. The frontend displays a generic "Invalid username or password" message.
         **Postcondition:** The user is authenticated, and an active session is established via the JWT.
 
-![UC2: Login](/docs/diagrams/UC2png)
+![UC2: Login](/docs/diagrams/UC2.png)
 
 ### UC3: Customize and Download a Configuration (Guest Flow)
 
