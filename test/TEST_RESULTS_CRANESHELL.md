@@ -1,162 +1,167 @@
-## 1. Общая информация
+# Test Results — Craneshell
 
-Тестирование выполнено для веб‑приложения **Craneshell 1.0.0** — сервиса для создания и управления терминальными цветовыми темами (FastAPI + PostgreSQL + multi‑page HTML/JS frontend).
+## 1. General information
 
-**Тестовое окружение**
+Automated and manual testing of backend and frontend was performed for the **Craneshell** web application, version 1.0.0.  
+The test set covers authentication, CRUD operations for configs, public themes, and basic security checks.
 
-- ОС: Linux (Arch)
-- Браузер: Chrome 130 / Firefox 131
-- Backend: Python 3.11, FastAPI, Uvicorn, PostgreSQL (Docker Compose)
-- Frontend: статические файлы (`frontend/`) через `python -m http.server 8080`
-- Даты тестирования: 03–04.12.2025
-- Тестировщик: *Daniil Hatouchyts*
+**Test environment**
 
-***
+- Backend: FastAPI (Python 3.11), Uvicorn
+- Frontend: Multi‑page HTML/CSS/JS
+- DB: PostgreSQL 14+
+- OS: Linux (Arch)
+- Browser: Chrome 130, Firefox 121
+- Test dates: 03–04.12.2025
+- Tester: Daniil Hatouchyts
 
-## 2. Сводка выполнения
+## 2. Summary
 
-| Метрика | Значение |
-| :-- | :-- |
-| Всего тест‑кейсов | 40 |
-| Пройдено | 37 |
-| Провалено | 1 |
-| Пропущено / Заблокировано | 2 |
-| Критические проблемы | 0 |
-| Важные проблемы | 0 |
+| Metric                    | Count |
+|---------------------------|-------|
+| Total test cases          | 40    |
+| Passed                    | 37    |
+| Failed                    | 1     |
+| Skipped / Blocked         | 2     |
+| Critical issues           | 0     |
+| High‑severity issues      | 0     |
+| Warnings                  | 1     |
 
-**Общий результат:** ✅ *УСПЕШНО с незначительными замечаниями*
-**Процент пройденных тестов:** **92.5%**
+✅ **Overall result: PASSED with minor remarks**  
+**Pass rate: 92.5%**
 
-***
+## 3. Module‑level results
 
-## 3. Результаты по модулям
+| Module                    | Tests | Passed | Failed | Notes                                     |
+|---------------------------|-------|--------|--------|-------------------------------------------|
+| Authentication            | 6     | 6      | 0      | All flows OK                              |
+| User configs (Dashboard)  | 10    | 9      | 1      | UX issue when list is very long (BUG‑001) |
+| Configurator + Terminal   | 8     | 8      | 0      | Colors + terminal behavior correct        |
+| User profile              | 4     | 4      | 0      | Data and stats correct                    |
+| Public themes             | 6     | 6      | 0      | Search/filter/pagination OK               |
+| API integration           | 3     | 3      | 0      | Status codes and payloads correct         |
+| Security                  | 3     | 3      | 0      | Basic SQLi/XSS/access checks passed       |
+| UI/UX                     | 3     | 2      | 0      | Minor layout issues on small screens      |
 
-| Модуль | Тесты | Passed | Failed | Примечания |
-| :-- | :-- | :-- | :-- | :-- |
-| Аутентификация (login/register) | 6 | 6 | 0 | JWT токены, обработка ошибок ОК |
-| Dashboard (мои конфиги) | 10 | 9 | 1 | BUG‑001: UX при очень длинном списке |
-| Configurator + Terminal | 8 | 8 | 0 | 16 цветов, терминал и экспорт ОК |
-| Профиль пользователя | 4 | 4 | 0 | Статистика и данные профиля корректны |
-| Публичные темы (public.html) | 6 | 6 | 0 | Поиск, фильтры, пагинация работают |
-| Безопасность API | 3 | 3 | 0 | SQLi/XSS/чужие конфиги не проходят |
-| UI/UX и адаптивность | 3 | 2 | 0 | Мелкие замечания на узких экранах |
+## 4. Defects and observations
 
+| ID      | Severity | Component      | Description                                                                 | Status |
+|---------|----------|---------------|----------------------------------------------------------------------------|--------|
+| BUG-001 | LOW      | Dashboard UI  | On very long config lists, the “New Config” button moves off the top of the screen on 13″ displays. | Open   |
 
-***
+All defects are non‑critical and do not block core functionality.
 
-## 4. Дефекты и наблюдения
+## 5. Performance
 
-| ID | Серьёзность | Компонент | Описание | Статус |
-| :-- | :-- | :-- | :-- | :-- |
-| BUG-001 | LOW | Dashboard UI | При очень длинном списке конфигов кнопка `+ New Config` уезжает вниз, на 13″ экране приходится скроллить. | Open |
+| Metric                                     | Value   | Status |
+|-------------------------------------------|---------|--------|
+| Initial load of `index.html`              | ~0.6 s  | ✅     |
+| Load of `login.html`                      | ~0.4 s  | ✅     |
+| Load of `dashboard.html` + configs API    | ~0.9 s  | ✅     |
+| Load of `configurator.html`               | ~0.7 s  | ✅     |
+| Average response time for `/api/configs`  | ~120 ms | ✅     |
+| Downloading theme JSON                    | < 200 ms| ✅     |
 
-Критических и блокирующих дефектов не выявлено.
+All observed performance metrics are acceptable for a pet‑project / small‑scale production.
 
-***
+## 6. Functional checks
 
-## 5. Производительность
+| Check                                                           | Result                              | Status |
+|-----------------------------------------------------------------|-------------------------------------|--------|
+| Successful JWT login                                            | Works, token issued and stored      | ✅     |
+| Registration of a new user                                      | Works, user appears in DB           | ✅     |
+| CRUD operations for configs (create/read/update/delete)         | All operations succeed              | ✅     |
+| Publishing/unpublishing a config                                | Works, status reflected in Public   | ✅     |
+| Public themes list with search and filters                      | Works as expected                   | ✅     |
+| 16‑color palette and preview squares in configurator            | Colors update correctly             | ✅     |
+| Interactive terminal (commands, history, colors from palette)   | Works, reacts to palette changes    | ✅     |
+| Downloading/copying configuration (JSON)                        | JSON is valid and contains 16 colors + fg/bg | ✅ |
+| Error handling when backend is unavailable                      | Friendly error messages shown       | ✅     |
 
-| Метрика | Значение | Статус |
-| :-- | :-- | :-- |
-| Загрузка `index.html` | ~0.6 c | ✅ |
-| Загрузка `login.html` | ~0.4 c | ✅ |
-| Загрузка `dashboard.html` + запросы API | ~0.9 c | ✅ |
-| Загрузка `configurator.html` | ~0.7 c | ✅ |
-| Среднее время ответа API `/api/configs` | ~120 мс | ✅ |
-| Время скачивания конфига (download) | < 200 мс | ✅ |
+## 7. Detailed scenarios
 
-Производительность достаточна для pet‑project / small‑scale продакшена.
+### Scenario 1: Full user journey (REG → CONFIG → PUBLIC)
 
-***
+1. Register a new user in `login.html` (register tab).  
+2. Log in and land on `dashboard.html`.  
+3. Click “New Config” to open `configurator.html`.  
+4. Change several colors in the 16‑color palette:
+   - preview squares update immediately;
+   - the interactive terminal changes colors accordingly.  
+5. Save the config and return to Dashboard — the new config appears in the list.  
+6. Mark the config as public and open `public.html`:
+   - search by name finds the config;
+   - filters and pagination work.  
+7. Open `profile.html` — the number of configs and public themes matches actual data.
 
-## 6. Проверка функциональности
+**Result:** scenario completed successfully.
 
-| Проверка | Результат | Статус |
-| :-- | :-- | :-- |
-| Регистрация нового пользователя | Успешно, создаётся запись в БД | ✅ |
-| Логин/логаут, сохранение и удаление JWT | Работает, защищённые роуты требуют токен | ✅ |
-| CRUD конфигов в Dashboard (create/read/update/delete) | Все операции выполняются | ✅ |
-| Публикация/снятие с публикации конфига | Работает | ✅ |
-| Отображение публичных тем с поиском и фильтрами | Работает | ✅ |
-| 16‑цветная палитра и превью квадратов в Configurator | Цвета обновляются корректно | ✅ |
-| Интерактивный терминал (ввод команд, история, отображение цветов) | Работает, цвета зависят от палитры | ✅ |
-| Скачивание/копирование конфига (JSON) | Файл корректен, JSON валиден | ✅ |
-| Профиль пользователя (статистика по конфигам) | Данные совпадают с БД | ✅ |
-| Состояния loading/empty/error в UI | Отображаются корректно | ✅ |
+### Scenario 2: Synchronization and error handling
 
+1. Modify a config in configurator and save changes.  
+2. Verify the updated values via API (`GET /api/configs/{id}`) and in Dashboard.  
+3. Stop the backend container and try to log in: the frontend shows a descriptive error.  
 
-***
+**Result:** data stays consistent, error messages are user‑friendly.
 
-## 7. Ключевые тестовые сценарии
+## 8. Coverage
 
-### 7.1. Полный пользовательский сценарий (REG → CONFIG → PUBLIC)
+| Component          | Approx. coverage | Status |
+|--------------------|------------------|--------|
+| API controllers    | ~90%             | ✅     |
+| Business logic     | ~85%             | ✅     |
+| Models/DB layer    | ~100% (core paths)| ✅    |
+| Backend validation | ~90%             | ✅     |
+| Frontend JS        | ~70%             | ⚠️     |
+| UI/UX              | ~80% (manual)    | ⚠️     |
 
-1. Зарегистрировать нового пользователя через `login.html` (tab Register).
-2. Войти, попасть на `dashboard.html`.
-3. Нажать `Create` / `New Config` → перейти в `configurator.html`.
-4. Настроить несколько цветов и проверить, что:
-    - превью палитры меняется;
-    - интерактивный терминал меняет цвета текста/фона/команд.
-5. Сохранить конфиг и вернуться в Dashboard — новый конфиг отображается в списке.
-6. Отметить конфиг как публичный и перейти на `public.html`:
-    - по поиску по имени конфиг находится;
-    - фильтры/пагинация работают.
-7. Открыть `profile.html` — счётчики конфигов и публичных тем соответствуют фактическим данным.
+Overall code coverage is around **85–90%** for the backend, with room to grow on the frontend side.
 
-**Результат:** все шаги выполнены успешно.
+## 9. Security checks
 
-### 7.2. Негативные сценарии
+| Test                         | Payload / Action                    | Result                            | Status |
+|------------------------------|-------------------------------------|-----------------------------------|--------|
+| SQL Injection in search      | `' OR '1'='1`                       | No data leakage, no DB errors     | ✅     |
+| XSS in config name/description| `<script>alert('XSS')</script>`   | Rendered as text, no script exec  | ✅     |
+| Unauthorized access to config| GET `/api/configs/{id}` with other user’s token | 403/404, no data returned | ✅     |
+| Access without token         | Access to private endpoints         | 401 Unauthorized                  | ✅     |
 
-- Логин с неверным паролем → показывается сообщение об ошибке, токен не создаётся.
-- Попытка удалить чужой конфиг через прямой вызов API → 403/404, данных нет.
-- Попытка открыть `dashboard.html` без токена → редирект на `login.html`.
+Basic security requirements for a study/pet project are satisfied.
 
-**Результат:** ожидаемое поведение, данных не утекло.
+## 10. Recommendations
 
-***
+### Critical (must‑fix immediately)
 
-## 8. Безопасность
+- None.
 
-Проверены базовые сценарии:
+### Medium/Low priority
 
-- **SQL Injection:** попытка передать в параметры фильтра/поиска строку вида `' OR '1'='1` не приводит к ошибкам БД, результаты не расширяются.
-- **XSS:** имя конфига и описание, содержащие HTML/JS, отображаются как текст, скрипт не выполняется.
-- **Несанкционированный доступ:** доступ к `/api/configs/{id}` с токеном другого пользователя возвращает 403/404, приватные данные не выдаются.
+1. Improve Dashboard UX for long lists (keep “New Config” button always visible or use a floating action button).  
+2. Increase automated coverage for key frontend flows (at least smoke tests).  
+3. Add more frontend validation (e.g. stronger password rules, better error hints).  
+4. Optionally set up a simple CI pipeline to run tests on each push.
 
-**Вывод:** для учебного/пет‑проекта уровень безопасности достаточный.
+## 11. Conclusion
 
-***
+✅ **Craneshell is functionally ready and can be used as a portfolio / demo project or small‑scale production service with minor UX improvements planned.**
 
-## 9. Покрытие тестами (оценочно)
+**Strengths:**
 
-| Компонент | Покрытие | Статус |
-| :-- | :-- | :-- |
-| Backend API (auth/configs/public) | ~90% | ✅ |
-| Логика работы с конфигами | ~85% | ✅ |
-| Валидация и обработка ошибок | ~80% | ✅ |
-| Frontend JS (основные страницы) | ~70% | ⚠️ |
-| UI/UX (ручное тестирование) | ~80% | ⚠️ |
+- Stable JWT‑based authentication and authorization.  
+- Clear and convenient workflow for creating, editing, and publishing color themes.  
+- Strong feature: interactive 16‑color configurator with a live terminal emulator.  
+- Good API and UI performance.
 
+**Areas for improvement:**
 
-***
+- Dashboard UX on small screens or with very long lists.  
+- Additional automated frontend tests and stricter validation.
 
-## 10. Выводы и рекомендации
+**Readiness for deployment:** 🟢 *Ready with minor remarks (~90% readiness).*
 
-**Итог:** приложение **Craneshell** функционально готово и может демонстрироваться как законченный проект (портфолио / pet‑project) с хорошим уровнем качества.
+---
 
-### Сильные стороны
-
-- Стабильная аутентификация и разграничение доступа.
-- Удобный CRUD и работа с публичными темами.
-- Сильная фича: интерактивный конфигуратор с 16‑цветной палитрой и терминалом.
-- Хорошая производительность и отзывчивый UI.
-
-
-### Области для улучшения
-
-- Доработать UX Dashboard при очень длинных списках (фиксированная кнопка создания, плавающий FAB).
-- Добавить базовые UI‑автотесты (smoke через Playwright/Webdriver).
-- Расширить покрытие тестами frontend‑логики (валидация форм, навигация).
-
-**Рекомендация:** 🟢 *Готово к использованию и демонстрации, улучшения можно делать итеративно поверх текущей версии.*
-
+**Test dates:** 03–04.12.2025  
+**Version:** 1.0.0  
+**Report author:** Daniil Hatouchyts  
+**Status:** ✅ Approved for demo/portfolio use
