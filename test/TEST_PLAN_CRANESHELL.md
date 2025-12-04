@@ -173,5 +173,5 @@ Overall risk level: **Low–Medium**.
 
 **Creation date:** 03.12.2025  
 **Version:** 1.0  
-**Author:** Daniil Hatouchyts  
+**Author:** Kazak Maksim
 **Status:** ✅ Approved

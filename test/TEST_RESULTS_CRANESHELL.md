@@ -13,7 +13,7 @@ The test set covers authentication, CRUD operations for configs, public themes, 
 - OS: Linux (Arch)
 - Browser: Chrome 130, Firefox 121
 - Test dates: 03–04.12.2025
-- Tester: Daniil Hatouchyts
+- Tester: Maksim Kazak
 
 ## 2. Summary
 
